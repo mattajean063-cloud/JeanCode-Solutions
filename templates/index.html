@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TÍTULO PROFESIONAL -->
+    <title>{{ titulo_pagina }}</title>
+
+    <!-- LOGO VECTORIAL HD EN LA PESTAÑA DEL NAVEGADOR -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f172a'/><text x='50%' y='68%' font-size='55' font-weight='900' font-family='sans-serif' fill='%2322d3ee' text-anchor='middle'>JC</text></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Font Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-teal-500 selection:text-slate-900">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- LOGO DE TU IMAGEN JPG CORREGIDO -->
+                <div class="w-10 h-10 rounded-xl overflow-hidden border border-teal-500/40 bg-slate-950 flex items-center justify-center shadow-lg shadow-teal-500/10">
+                    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="{{ marca }}" class="w-full h-full object-cover">
+                </div>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                    {{ marca }}
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/{{ whatsapp_clean }}" target="_blank" class="hidden sm:flex items-center space-x-2 text-slate-300 hover:text-teal-400 text-sm font-medium transition-colors">
+                    <i class="fab fa-whatsapp text-emerald-400 text-lg"></i>
+                    <span>{{ whatsapp_num }}</span>
+                </a>
+                <a href="#contacto" class="bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-teal-500/20 text-sm flex items-center space-x-2">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Cotizar Proyecto</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto text-center px-4 py-20 relative overflow-hidden">
+        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 mb-6 text-sm text-teal-400">
+            <span class="flex h-2 w-2 rounded-full bg-teal-400 animate-pulse"></span>
+            <span>Soluciones 100% Software Digital sin Inversiones Físicas</span>
+        </div>
+        <h2 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+            Lleva tu negocio al mundo digital con <br><span class="bg-gradient-to-r from-teal-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">Plataformas Web Profesionales</span>
+        </h2>
+        <p class="text-slate-400 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed mb-8">
+            Desarrollamos menús QR interactivos, tiendas e-commerce y sistemas web optimizados para funcionar directo en cualquier smartphone, tablet o computadora existente.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <a href="#catalogo" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3.5 rounded-xl border border-slate-700 transition-all flex items-center space-x-2">
+                <i class="fas fa-th-list text-teal-400"></i>
+                <span>Explorar Catálogo</span>
+            </a>
+            <a href="https://wa.me/{{ whatsapp_clean }}?text=Hola%20JeanCode%20Solutions,%20necesito%20informaci%C3%B3n%20sobre%20un%20sistema%20web" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-600/20 flex items-center space-x-2">
+                <i class="fab fa-whatsapp text-lg"></i>
+                <span>Chat Directo por WhatsApp</span>
+            </a>
+        </div>
+
+        <!-- Ventajas Software Puro -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-900/60 border border-slate-800 p-6 rounded-2xl max-w-4xl mx-auto">
+            <div>
+                <span class="block text-2xl sm:text-3xl font-black text-teal-400">Q0</span>
+                <span class="text-xs text-slate-400">En Equipos Extra</span>
+            </div>
+            <div>
+                <span class="block text-2xl sm:text-3xl font-black text-teal-400">100%</span>
+                <span class="text-xs text-slate-400">Funciona en Celular</span>
+            </div>
+            <div>
+                <span class="block text-2xl sm:text-3xl font-black text-teal-400">0%</span>
+                <span class="text-xs text-slate-400">Comisiones por Venta</span>
+            </div>
+            <div>
+                <span class="block text-2xl sm:text-3xl font-black text-teal-400">Directo</span>
+                <span class="text-xs text-slate-400">A tu WhatsApp</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Servicios -->
+    <main id="catalogo" class="max-w-7xl mx-auto px-4 py-12 space-y-20">
+        {% for cat in categorias %}
+        <section id="{{ cat.id }}">
+            <div class="flex items-center space-x-3 mb-8 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center text-teal-400">
+                    <i class="fas {{ cat.icono }} text-lg"></i>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{{ cat.nombre }}</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for servicio in cat.servicios %}
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-teal-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/5 group">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-950">
+                            <img src="{{ servicio.imagen }}" alt="{{ servicio.titulo }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                            <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-teal-400 border border-slate-800">
+                                {{ servicio.tipo }}
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-white group-hover:text-teal-400 transition-colors mb-2">{{ servicio.titulo }}</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{{ servicio.descripcion }}</p>
+
+                            <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80 mb-6 flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs text-slate-500 block">Inversión Única</span>
+                                    <span class="text-2xl font-black text-teal-400">{{ servicio.precio }}</span>
+                                </div>
+                                <span class="text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md font-semibold border border-emerald-500/20">Sin mensualidad</span>
+                            </div>
+
+                            <ul class="space-y-2.5 mb-6 text-sm text-slate-300">
+                                {% for item in servicio.caracteristicas %}
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-teal-400 mt-1 mr-2 flex-shrink-0 text-xs"></i>
+                                    <span class="text-xs leading-normal">{{ item }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0 space-y-3">
+                        <button onclick="abrirModal('{{ servicio.id_modal }}')" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs rounded-xl transition-all border border-slate-700/60 flex items-center justify-center space-x-2">
+                            <i class="fas fa-eye text-teal-400"></i>
+                            <span>Ver Detalles y Ejemplo</span>
+                        </button>
+                        
+                        <button onclick="pedirPorWhatsApp('{{ servicio.titulo }}', '{{ servicio.precio }}')" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/10">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal de Detalles -->
+                <div id="{{ servicio.id_modal }}" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+                        <button onclick="cerrarModal('{{ servicio.id_modal }}')" class="absolute top-4 right-4 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+                            <i class="fas fa-times"></i>
+                        </button>
+
+                        <div class="flex items-center space-x-4">
+                            <img src="{{ servicio.imagen }}" class="w-16 h-16 rounded-xl object-cover border border-slate-800" alt="Preview">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">{{ servicio.titulo }}</h3>
+                                <span class="text-teal-400 font-extrabold text-lg">{{ servicio.precio }}</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-sm">
+                            <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
+                                <h5 class="text-xs font-bold text-teal-400 uppercase tracking-wider mb-2">
+                                    <i class="fas fa-lightbulb mr-1.5"></i>¿Cómo funciona en la práctica?
+                                </h5>
+                                <p class="text-slate-300 leading-relaxed text-xs sm:text-sm">{{ servicio.ejemplo }}</p>
+                            </div>
+
+                            <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
+                                <h5 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2">
+                                    <i class="fas fa-desktop mr-1.5"></i>Demostración Digital
+                                </h5>
+                                <p class="text-slate-300 leading-relaxed text-xs sm:text-sm">{{ servicio.demostracion }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end space-x-3 pt-4 border-t border-slate-800">
+                            <button onclick="cerrarModal('{{ servicio.id_modal }}')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs">
+                                Cerrar
+                            </button>
+                            <button onclick="pedirPorWhatsApp('{{ servicio.titulo }}', '{{ servicio.precio }}')" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Solicitar por WhatsApp</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+
+        <!-- FAQ -->
+        <section class="max-w-4xl mx-auto py-8">
+            <h3 class="text-2xl font-bold text-center text-white mb-8">Preguntas Frecuentes</h3>
+            <div class="space-y-4">
+                {% for faq in faqs %}
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                    <h4 class="font-bold text-white text-base mb-2 flex items-center">
+                        <i class="fas fa-question-circle text-teal-400 mr-2.5"></i>
+                        {{ faq.p }}
+                    </h4>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed pl-7">{{ faq.r }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="border-t border-slate-800 bg-slate-950 py-20">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-teal-400 font-medium text-xs uppercase tracking-wider">Atención Directa</span>
+                <h3 class="text-3xl font-bold text-white mt-1 mb-3">Solicita tu Cotización Personalizada</h3>
+                <p class="text-slate-400 text-sm">Completa el formulario y generará un mensaje formateado a nuestro WhatsApp.</p>
+            </div>
+
+            <form onsubmit="enviarFormularioWhatsApp(event)" class="space-y-5 bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-xl">
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-2">Tu Nombre / Empresa</label>
+                        <input type="text" id="clienteNombre" required placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-2">Correo Electrónico</label>
+                        <input type="email" id="clienteEmail" required placeholder="correo@ejemplo.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-2">Servicio Requerido</label>
+                    <select id="clienteServicio" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-500 text-sm">
+                        <option value="Menú QR Digital (Visual) - Q450">Menú QR Digital (Visual) - Q450</option>
+                        <option value="Menú QR + Carrito a WhatsApp - Q1,200">Menú QR + Carrito a WhatsApp - Q1,200</option>
+                        <option value="Sistema de Pedidos Digital - Q2,200">Sistema de Pedidos Digital - Q2,200</option>
+                        <option value="Tienda E-commerce Express - Q1,800">Tienda E-commerce Express - Q1,800</option>
+                        <option value="Tienda E-commerce PRO - Q3,500">Tienda E-commerce PRO - Q3,500</option>
+                        <option value="Landing Page Comercial - Q950">Landing Page Comercial - Q950</option>
+                        <option value="Sitio Web Corporativo - Q2,800">Sitio Web Corporativo - Q2,800</option>
+                        <option value="Sistema Web de Ventas y Caja - Q3,200">Sistema Web de Ventas y Caja - Q3,200</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-2">Detalles de tu Proyecto</label>
+                    <textarea id="clienteMensaje" rows="3" placeholder="Cuéntanos un poco sobre tu negocio y lo que necesitas..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-500 text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center space-x-2 text-sm">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    <span>Enviar a WhatsApp</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
+            <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg overflow-hidden border border-teal-500/40 bg-slate-950">
+                        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="{{ marca }}" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-xl font-bold text-white">{{ marca }}</span>
+                </div>
+                <p class="text-slate-500 text-xs leading-relaxed">
+                    Desarrollo de software web independiente enfocado en soluciones eficientes y rentables.
+                </p>
+            </div>
+
+            <div class="space-y-2">
+                <h5 class="text-white font-bold text-sm mb-3">Contacto Directo</h5>
+                <p class="flex items-center space-x-2 text-xs">
+                    <i class="fas fa-envelope text-teal-400"></i>
+                    <a href="mailto:{{ email_contacto }}" class="hover:text-teal-400 transition-colors">{{ email_contacto }}</a>
+                </p>
+                <p class="flex items-center space-x-2 text-xs">
+                    <i class="fab fa-whatsapp text-emerald-400"></i>
+                    <a href="https://wa.me/{{ whatsapp_clean }}" target="_blank" class="hover:text-emerald-400 transition-colors">{{ whatsapp_num }}</a>
+                </p>
+            </div>
+
+            <div class="space-y-2">
+                <h5 class="text-white font-bold text-sm mb-3">Garantía JeanCode</h5>
+                <p class="text-slate-500 text-xs leading-relaxed">
+                    Software optimizado y personalizado para operar desde cualquier navegador web sin requerir compras de hardware adicional.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 space-y-4 sm:space-y-0">
+            <p>© 2026 {{ marca }}. Todos los derechos reservados.</p>
+            <p class="flex items-center space-x-1">
+                <span>Desarrollado por</span>
+                <span class="text-teal-400 font-semibold">Jean</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const whatsappTelefono = "{{ whatsapp_clean }}";
+
+        function abrirModal(idModal) {
+            document.getElementById(idModal).classList.remove('hidden');
+        }
+
+        function cerrarModal(idModal) {
+            document.getElementById(idModal).classList.add('hidden');
+        }
+
+        function pedirPorWhatsApp(servicio, precio) {
+            const mensaje = `Hola *{{ marca }}*, estoy interesado en adquirir el servicio:\n\n📌 *${servicio}* (${precio})\n\n¿Podrían darme más detalles sobre cómo iniciar?`;
+            const url = `https://wa.me/${whatsappTelefono}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        function enviarFormularioWhatsApp(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('clienteNombre').value;
+            const email = document.getElementById('clienteEmail').value;
+            const servicio = document.getElementById('clienteServicio').value;
+            const mensajeDetalle = document.getElementById('clienteMensaje').value;
+
+            const mensaje = `🚀 *SOLICITUD DE COTIZACIÓN - WEB*\n\n` +
+                            `👤 *Cliente / Empresa:* ${nombre}\n` +
+                            `📧 *Correo:* ${email}\n` +
+                            `📌 *Servicio:* ${servicio}\n` +
+                            `💬 *Detalles del Proyecto:* ${mensajeDetalle || 'Sin detalles'}`;
+
+            const url = `https://wa.me/${whatsappTelefono}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
